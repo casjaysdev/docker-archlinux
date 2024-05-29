@@ -22,9 +22,9 @@ ARG NODE_MANAGER="system"
 
 ARG IMAGE_REPO="casjaysdev/archlinux"
 ARG IMAGE_VERSION="latest"
-ARG CONTAINER_VERSION="USE_DATE "
+ARG CONTAINER_VERSION="${BUILD_DATE}"
 
-ARG PULL_URL="menci/archlinuxarm"
+ARG PULL_URL="lopsided/archlinux"
 ARG DISTRO_VERSION="${IMAGE_VERSION}"
 ARG BUILD_VERSION="${BUILD_DATE}"
 
@@ -72,9 +72,9 @@ RUN \
   set -ex; \
   mkdir -p "${DEFAULT_DATA_DIR}" "${DEFAULT_CONF_DIR}" "${DEFAULT_TEMPLATE_DIR}" "/root/docker/setup" "/etc/profile.d"; \
   mkdir -p "${AUR_HOME}/.gnupg" "${AUR_HOME}/build"; \
-  pkmgr install archlinux-keyring; \
-  pacman-key --init;pacman-key --populate; \
-  pkmgr update; \
+  pacman -Sy --noconfirm gnupg archlinux-keyring; \
+  pacman-key --init;pacman-key --populate;pacman -Scc --noconfirm;pacman -Syyu --noconfirm; \
+  pacman -Sy gnupg --noconfirm;pacman -Sy archlinux-keyring --noconfirm; \
   echo ""
 
 RUN \
@@ -130,7 +130,7 @@ RUN \
 
 RUN set -ex \
   echo "Custom Settings"; \
-  echo 
+  echo
 
 RUN \
   echo "Setting up users and scripts "; \
@@ -162,7 +162,7 @@ RUN \
 
 RUN set -ex; \
   echo "Custom Applications"; \
-  echo 
+  echo
 
 RUN \
   set -ex; \

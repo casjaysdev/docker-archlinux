@@ -25,13 +25,10 @@ cp -Rfva "$HOME/.local/share/CasjaysDev/dockermgr/archlinux/rootfs/." "$HOME/.lo
 docker run -d \
 --restart always \
 --privileged \
---name casjaysdevdocker-archlinux \
+--name casjaysdev-archlinux \
 --hostname archlinux \
 -e TZ=${TIMEZONE:-America/New_York} \
--v "$HOME/.local/share/srv/docker/casjaysdevdocker-archlinux/rootfs/data:/data:z" \
--v "$HOME/.local/share/srv/docker/casjaysdevdocker-archlinux/rootfs/config:/config:z" \
--p 80:80 \
-casjaysdevdocker/archlinux:latest
+casjaysdev/archlinux:latest
 ```
   
 ## via docker-compose  
@@ -40,39 +37,34 @@ casjaysdevdocker/archlinux:latest
 version: "2"
 services:
   ProjectName:
-    image: casjaysdevdocker/archlinux
-    container_name: casjaysdevdocker-archlinux
+    image: casjaysdev/archlinux
+    container_name: casjaysdev-archlinux
     environment:
       - TZ=America/New_York
       - HOSTNAME=archlinux
-    volumes:
-      - "$HOME/.local/share/srv/docker/casjaysdevdocker-archlinux/rootfs/data:/data:z"
-      - "$HOME/.local/share/srv/docker/casjaysdevdocker-archlinux/rootfs/config:/config:z"
-    ports:
-      - 80:80
     restart: always
 ```
   
 ## Get source files  
   
 ```shell
-dockermgr download src casjaysdevdocker/archlinux
+dockermgr download src casjaysdev/archlinux
 ```
   
 OR
   
 ```shell
-git clone "https://github.com/casjaysdevdocker/archlinux" "$HOME/Projects/github/casjaysdevdocker/archlinux"
+git clone "https://github.com/casjaysdev/archlinux" "$HOME/Projects/github/casjaysdev/archlinux"
 ```
   
 ## Build container  
   
 ```shell
-cd "$HOME/Projects/github/casjaysdevdocker/archlinux"
+cd "$HOME/Projects/github/casjaysdev/archlinux"
 buildx 
 ```
   
 ## Authors  
   
 🤖 casjay: [Github](https://github.com/casjay) 🤖  
-⛵ casjaysdevdocker: [Github](https://github.com/casjaysdevdocker) [Docker](https://hub.docker.com/u/casjaysdevdocker) ⛵  
+⛵ casjaysdev: [Github](https://github.com/casjaysdev) [Docker](https://hub.docker.com/u/casjaysdev) ⛵  
